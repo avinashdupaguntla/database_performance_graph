@@ -1,0 +1,137 @@
+<mxfile host="app.diagrams.net" modified="2026-03-21T12:00:00.000Z" agent="User" version="24.0.0" type="device">
+  <diagram id="database-performance-graph" name="Database Performance LangGraph">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Title -->
+        <mxCell id="title" value="Database Performance Investigation Assistant — LangGraph Architecture"
+          style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=18;fontStyle=1;fontColor=#1a1a2e;"
+          vertex="1" parent="1">
+          <mxGeometry x="350" y="20" width="650" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- START -->
+        <mxCell id="start"
+          value="START"
+          style="ellipse;whiteSpace=wrap;html=1;fillColor=#1a1a2e;fontColor=#ffffff;strokeColor=#1a1a2e;fontSize=14;fontStyle=1;"
+          vertex="1" parent="1">
+          <mxGeometry x="620" y="80" width="100" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- understand_issue -->
+        <mxCell id="issue"
+          value="understand_issue&#xa;&#xa;Acknowledge issue&#xa;Severity: LOW / MEDIUM / HIGH"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="530" y="170" width="260" height="80" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e1"
+          style="edgeStyle=orthogonalEdgeStyle;strokeColor=#1a1a2e;strokeWidth=2;"
+          edge="1" source="start" target="issue" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Parallel Label -->
+        <mxCell id="par"
+          value="PARALLEL FAN-OUT"
+          style="text;html=1;strokeColor=none;fillColor=none;fontSize=11;fontStyle=2;fontColor=#e07000;"
+          vertex="1" parent="1">
+          <mxGeometry x="585" y="270" width="160" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- Query Structure -->
+        <mxCell id="query"
+          value="analyze_query_structure&#xa;&#xa;Review joins&#xa;filters, aggregations&#xa;subqueries, sorting"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="220" y="320" width="220" height="90" as="geometry"/>
+        </mxCell>
+
+        <!-- Index Strategy -->
+        <mxCell id="index"
+          value="analyze_index_strategy&#xa;&#xa;Missing indexes&#xa;Redundant indexes&#xa;Optimization ideas"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="550" y="320" width="220" height="90" as="geometry"/>
+        </mxCell>
+
+        <!-- Database Load -->
+        <mxCell id="load"
+          value="analyze_database_load&#xa;&#xa;Locks, CPU, Memory&#xa;I/O and Concurrency"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="880" y="320" width="220" height="90" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e2a"
+          style="edgeStyle=orthogonalEdgeStyle;strokeColor=#82b366;strokeWidth=2;"
+          edge="1" source="issue" target="query" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e2b"
+          style="edgeStyle=orthogonalEdgeStyle;strokeColor=#82b366;strokeWidth=2;"
+          edge="1" source="issue" target="index" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e2c"
+          style="edgeStyle=orthogonalEdgeStyle;strokeColor=#82b366;strokeWidth=2;"
+          edge="1" source="issue" target="load" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Fan In -->
+        <mxCell id="fanin"
+          value="FAN-IN (wait for all 3)"
+          style="text;html=1;strokeColor=none;fillColor=none;fontSize=11;fontStyle=2;fontColor=#e07000;"
+          vertex="1" parent="1">
+          <mxGeometry x="570" y="430" width="180" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- Decision Node -->
+        <mxCell id="classify"
+          value="classify_performance_issue&#xa;&#xa;Reads all 3 analyses&#xa;Returns JSON: {needs_deep_investigation, reason}"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="460" y="470" width="400" height="90" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e3a" edge="1" source="query" target="classify" parent="1"
+          style="edgeStyle=orthogonalEdgeStyle;strokeColor=#82b366;strokeWidth=2;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e3b" edge="1" source="index" target="classify" parent="1"
+          style="edgeStyle=orthogonalEdgeStyle;strokeColor=#82b366;strokeWidth=2;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e3c" edge="1" source="load" target="classify" parent="1"
+          style="edgeStyle=orthogonalEdgeStyle;strokeColor=#82b366;strokeWidth=2;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Conditional Diamond -->
+        <mxCell id="decision"
+          value="needs_deep&#xa;_investigation?"
+          style="rhombus;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;fontStyle=1;"
+          vertex="1" parent="1">
+          <mxGeometry x="595" y="600" width="140" height="90" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e4"
+          edge="1" source="classify" target="decision" parent="1"
+          style="edgeStyle=orthogonalEdgeStyle;strokeColor=#d6b656;strokeWidth=2;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Quick -->
+        <mxCell id="quick"
+          value="quick_optimization_plan&#xa;&#xa;Top fixes&#xa;Expected impact&#xa;Priority order"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="300" y
